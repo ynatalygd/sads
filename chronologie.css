@@ -422,3 +422,29 @@ body.modal-open { overflow: hidden; }
   .source-btn { display: none; }
   .source-modal { display: none !important; }
 }
+
+/* ---------- Lien de retour vers l'accueil ---------- */
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 20px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--muted);
+  text-decoration: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--ink);
+  outline: none;
+}
+
+@media print {
+  .back-link { display: none; }
+}
