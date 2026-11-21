@@ -1,5 +1,5 @@
 /* ============================================================
-   SADS — Page d'accueil
+   CSS SADS — Page d'accueil
    ============================================================ */
 
 :root {
@@ -128,4 +128,24 @@ body {
   .landing__header { margin-bottom: 40px; }
   .landing__nav { margin-bottom: 40px; }
   .landing__card { padding: 26px 22px; min-height: 120px; }
+}
+
+.lang-switch {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 13px;
+  padding: 8px 0;
+}
+
+.lang-switch a {
+  color: #682145;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.lang-switch a:hover {
+  color: #4b2e83;
+  text-decoration: underline;
 }
