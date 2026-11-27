@@ -867,4 +867,124 @@
                 <li><a href="https://catalogoenlinea.bibliotecanacional.gov.co/" target="_blank" rel="noopener">Catalogue de la Biblioteca Nacional de Colombia</a> (pour la <em>Biografía de Nariño</em>). <em>(trouvé sur Internet, à vérifier)</em></li>
               </ul>
               <h5>Niveau de confiance</h5>
-              <p><span class="confiance confiance-haute">Élevée</span> pour la <em>Biblioteca Histórica</em> ; <span class="confiance confiance-moyenne">Moyenne</span> pour la <em>Biografía de N
+              <p><span class="confiance confiance-haute">Élevée</span> pour la <em>Biblioteca Histórica</em> ; <span class="confiance confiance-moyenne">Moyenne</span> pour la <em>Biografía de Nariño</em> (datation à confirmer, 1910).</p>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 1910 — événement (deuil), conservé -->
+      <li class="evenement evenement-deuil">
+        <span class="annee">1910</span>
+        <div class="carte">
+          <h3>Centenaire — deuil de Bertilda</h3>
+          <p><strong>31 juillet 1910</strong> — Décès de <strong>Bertilda</strong>.</p>
+          <button class="bouton-sources" type="button" aria-haspopup="dialog">Sources</button>
+          <div class="sources" hidden>
+            <h5>Sources et liens</h5>
+            <ul>
+              <li><a href="https://es.wikipedia.org/wiki/Bertilda_Samper_Acosta" target="_blank" rel="noopener">Wikipedia — Bertilda Samper Acosta</a> : « Fallecimiento: 31 de julio de 1910 ». <em>(trouvé sur Internet, à vérifier)</em></li>
+              <li><a href="https://www.caroycuervo.gov.co/" target="_blank" rel="noopener">Instituto Caro y Cuervo</a> : « Bertilda (1856-1910) ». <em>(trouvé sur Internet, à vérifier)</em></li>
+            </ul>
+            <h5>Niveau de confiance</h5>
+            <p><span class="confiance confiance-haute">Élevée</span>.</p>
+          </div>
+        </div>
+      </li>
+
+      <!-- 1913 — événement (décès), conservé -->
+      <li class="evenement evenement-deuil">
+        <span class="annee">1913</span>
+        <div class="carte">
+          <h3>Décès</h3>
+          <p><strong>17 mars</strong> — Décès à <strong>Bogotá</strong>. Inhumée au Cementerio Central.</p>
+          <p class="alerte"><strong>⚠ Divergence :</strong> source isolée : Guaduas, 17 mai.</p>
+          <button class="bouton-sources" type="button" aria-haspopup="dialog">Sources</button>
+          <div class="sources" hidden>
+            <h5>Sources et liens</h5>
+            <ul>
+              <li><a href="https://es.wikipedia.org/wiki/Soledad_Acosta_de_Samper" target="_blank" rel="noopener">Wikipedia (es)</a> : « (Bogotá, 5 de mayo de 1833-17 de marzo de 1913)… Sepultura: Cementerio Central de Bogotá ». <em>(trouvé sur Internet, à vérifier)</em></li>
+              <li><a href="https://www.iberarchivos.org/" target="_blank" rel="noopener">Iberarchivos</a> : « Murió el 17 de marzo de 1913 esta escritora ». <em>(trouvé sur Internet, à vérifier)</em></li>
+              <li><a href="https://enciclopedia.banrepcultural.org/index.php/Soledad_Acosta_de_Samper" target="_blank" rel="noopener">BanRepcultural</a> : « Muere Soledad Acosta de Samper » (1913). <em>(trouvé sur Internet, à vérifier)</em></li>
+            </ul>
+            <h5>Niveau de confiance</h5>
+            <p><span class="confiance confiance-haute">Élevée</span>.</p>
+          </div>
+        </div>
+      </li>
+
+    </ol>
+  </section>
+
+</main>
+
+<footer class="pied-page">
+  <p>Document de repérage — Soledad Acosta de Samper (1833–1913).</p>
+  <p class="alerte-pied">⚠ Les points signalés et les mentions « (trouvé sur Internet, à vérifier) » doivent être contrôlés sur source primaire ou en archives avant citation.</p>
+</footer>
+
+<div class="fenetre-sources" id="fenetre-sources" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="fenetre">
+    <button class="fermer" type="button" aria-label="Fermer">&times;</button>
+    <h4 class="titre-fenetre"></h4>
+    <div class="corps-fenetre"></div>
+  </div>
+</div>
+
+<script>
+  (function () {
+    const voile = document.getElementById('fenetre-sources');
+    const titreFenetre = voile.querySelector('.titre-fenetre');
+    const corpsFenetre = voile.querySelector('.corps-fenetre');
+    const boutonFermer = voile.querySelector('.fermer');
+
+    function ouvrirFenetre(bouton) {
+      // On cherche d'abord le bloc .oeuvres le plus proche du bouton ; sinon on prend la carte
+      const oeuvres = bouton.closest('.oeuvres');
+      const carte = bouton.closest('.carte');
+      const conteneur = oeuvres || carte;
+      const sources = conteneur.querySelector('.sources');
+      const evenement = carte.closest('.evenement');
+      const annee = evenement.querySelector('.annee').textContent.trim();
+
+      let titre;
+      if (oeuvres) {
+        titre = oeuvres.querySelector('.titre-oeuvres').textContent.trim();
+      } else {
+        const h3 = carte.querySelector('h3');
+        titre = h3 ? h3.textContent.trim() : '';
+      }
+
+      titreFenetre.textContent = annee + ' — ' + titre;
+      corpsFenetre.innerHTML = sources.innerHTML;
+      voile.classList.add('fenetre-ouverte');
+      voile.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('fenetre-active');
+      boutonFermer.focus();
+    }
+
+    function fermerFenetre() {
+      voile.classList.remove('fenetre-ouverte');
+      voile.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('fenetre-active');
+    }
+
+    document.querySelectorAll('.bouton-sources').forEach(function (bouton) {
+      bouton.addEventListener('click', function (e) {
+        e.preventDefault();
+        ouvrirFenetre(bouton);
+      });
+    });
+
+    voile.addEventListener('click', function (e) {
+      if (e.target === voile || e.target === boutonFermer) fermerFenetre();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && voile.classList.contains('fenetre-ouverte')) fermerFenetre();
+    });
+  })();
+</script>
+
+</body>
+</html>
