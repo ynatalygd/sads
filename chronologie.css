@@ -1,58 +1,61 @@
 /* ============================================================
    Soledad Acosta de Samper — Chronologie interactive
-   Feuille de style séparée (version avec modales Sources)
+   Feuille de style, classes en français
    ============================================================ */
 
 :root {
-  --bg: #f5f3ee;
-  --ink: #1f2937;
-  --muted: #6b7280;
-  --card-bg: #ffffff;
-  --warn: #b91c1c;
-  --warn-bg: #fef2f2;
-  --border: #e5e7eb;
-  --radius: 10px;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
-  --shadow-hover: 0 4px 14px rgba(0, 0, 0, 0.10), 0 2px 4px rgba(0, 0, 0, 0.06);
-  --conf-high: #059669;
-  --conf-medium: #ca8a04;
-  --conf-low: #b91c1c;
+  --fond: #f5f3ee;                 /* Je pose un fond crème pour adoucir la lecture longue */
+  --encre: #1f2937;                /* couleur du texte principal */
+  --gris: #6b7280;                 /* couleur du texte secondaire */
+  --carte-fond: #ffffff;           /* fond blanc des cartes */
+  --alerte: #b91c1c;               /* rouge réservé aux divergences */
+  --alerte-fond: #fef2f2;          /* rose pâle des blocs d'alerte */
+  --bordure: #e5e7eb;              /* bordure discrète */
+  --rayon: 10px;                   /* arrondi des cartes, une seule valeur pour tout */
+  --ombre: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+  --ombre-survol: 0 4px 14px rgba(0, 0, 0, 0.10), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --confiance-haute: #059669;      /* vert pour confiance élevée */
+  --confiance-moyenne: #ca8a04;    /* jaune-orange pour confiance moyenne */
+  --confiance-basse: #b91c1c;      /* rouge pour confiance faible */
+  --gris-oeuvre: #f3f4f6;          /* fond gris clair des blocs d'œuvres */
+  --gris-oeuvre-bord: #d1d5db;     /* bordure du bloc gris */
+  --gris-oeuvre-titre: #4b5563;    /* couleur du titre de bloc gris */
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; }       /* Je force le calcul des marges dans le padding */
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; }   /* Défilement doux quand on suit un lien interne */
 
 body {
   margin: 0;
   font-family: Georgia, "Charter", "Iowan Old Style", serif;
-  background: var(--bg);
-  color: var(--ink);
+  background: var(--fond);
+  color: var(--encre);
   line-height: 1.6;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
 }
 
-body.modal-open { overflow: hidden; }
+body.fenetre-active { overflow: hidden; }  /* Je bloque le fond quand une fenêtre s'ouvre */
 
 /* ---------- En-tête ---------- */
 
-.page-header {
+.entete {
   max-width: 900px;
   margin: 0 auto;
   padding: 56px 24px 32px;
   text-align: center;
 }
 
-.page-header h1 {
+.entete h1 {
   font-size: clamp(1.7rem, 4vw, 2.4rem);
   margin: 0 0 8px;
   letter-spacing: -0.015em;
   font-weight: 700;
 }
 
-.subtitle {
-  color: var(--muted);
+.sous-titre {
+  color: var(--gris);
   font-style: italic;
   margin: 0 0 22px;
   font-size: 1.05rem;
@@ -60,21 +63,22 @@ body.modal-open { overflow: hidden; }
 
 .note {
   font-size: 0.92rem;
-  color: var(--muted);
+  color: var(--gris);
   max-width: 620px;
   margin: 0 auto;
   padding: 14px 22px;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 10px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--bordure);
   line-height: 1.5;
 }
 
-.warn-inline { color: var(--warn); font-weight: 700; }
+.alerte-en-ligne { color: var(--alerte); font-weight: 700; }
+.oeuvres-en-ligne { color: var(--gris-oeuvre-titre); font-weight: 700; }
 
 /* ---------- Conteneur principal ---------- */
 
-.timeline {
+.chronologie {
   max-width: 900px;
   margin: 0 auto;
   padding: 20px 24px 80px;
@@ -82,15 +86,15 @@ body.modal-open { overflow: hidden; }
 
 /* ---------- Périodes et couleurs ---------- */
 
-.period { margin-bottom: 52px; }
+.periode { margin-bottom: 52px; }
 
-.period--1 { --accent: #2563eb; }
-.period--2 { --accent: #059669; }
-.period--3 { --accent: #ca8a04; }
-.period--4 { --accent: #ea580c; }
-.period--5 { --accent: #9333ea; }
+.periode-1 { --accent: #2563eb; }   /* bleu pour l'enfance */
+.periode-2 { --accent: #059669; }   /* vert pour la jeunesse */
+.periode-3 { --accent: #ca8a04; }   /* jaune pour les voyages */
+.periode-4 { --accent: #ea580c; }   /* orange pour la maturité */
+.periode-5 { --accent: #9333ea; }   /* violet pour le veuvage */
 
-.period__title {
+.titre-periode {
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 1.02rem;
   font-weight: 700;
@@ -100,22 +104,22 @@ body.modal-open { overflow: hidden; }
   border-radius: 8px;
   margin: 0 0 28px;
   letter-spacing: 0.01em;
-  box-shadow: var(--shadow);
+  box-shadow: var(--ombre);
 }
 
 /* ---------- Liste des événements ---------- */
 
-.events {
+.evenements {
   list-style: none;
   padding: 0;
   margin: 0;
   position: relative;
 }
 
-.events::before {
+.evenements::before {
   content: "";
   position: absolute;
-  left: 130px;
+  left: 130px;                    /* Je positionne la ligne verticale à hauteur des années */
   top: 8px;
   bottom: 8px;
   width: 3px;
@@ -126,15 +130,15 @@ body.modal-open { overflow: hidden; }
 
 /* ---------- Événement ---------- */
 
-.event {
+.evenement {
   display: grid;
-  grid-template-columns: 110px 1fr;
+  grid-template-columns: 110px 1fr;   /* deux colonnes : année, puis carte */
   column-gap: 60px;
   margin-bottom: 18px;
   position: relative;
 }
 
-.event__year {
+.annee {
   text-align: right;
   padding-top: 15px;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -146,7 +150,7 @@ body.modal-open { overflow: hidden; }
   line-height: 1.3;
 }
 
-.event__year::after {
+.annee::after {
   content: "";
   position: absolute;
   right: -30px;
@@ -155,25 +159,25 @@ body.modal-open { overflow: hidden; }
   height: 16px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 0 4px var(--bg);
+  box-shadow: 0 0 0 4px var(--fond);   /* Je crée un halo autour du point */
   transition: transform 0.15s ease;
 }
 
-.event__card {
-  background: var(--card-bg);
-  border-radius: var(--radius);
+.carte {
+  background: var(--carte-fond);
+  border-radius: var(--rayon);
   padding: 16px 22px;
-  box-shadow: var(--shadow);
+  box-shadow: var(--ombre);
   border-left: 3px solid var(--accent);
   transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.event__card:hover {
-  box-shadow: var(--shadow-hover);
-  transform: translateY(-1px);
+.carte:hover {
+  box-shadow: var(--ombre-survol);
+  transform: translateY(-1px);         /* Léger soulèvement au survol */
 }
 
-.event__card h3 {
+.carte h3 {
   margin: 0 0 8px;
   font-size: 1.02rem;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -182,35 +186,45 @@ body.modal-open { overflow: hidden; }
   line-height: 1.35;
 }
 
-.event__card p { margin: 0 0 8px; }
-.event__card p:last-child { margin-bottom: 0; }
-.event__card em { font-style: italic; }
-.event__card strong { font-weight: 700; }
+.carte p { margin: 0 0 8px; }
+.carte p:last-child { margin-bottom: 0; }
+.carte em { font-style: italic; }
+.carte strong { font-weight: 700; }
 
-/* ---------- Bloc d'avertissement ---------- */
+/* ---------- Variantes d'événement ---------- */
 
-.warn {
-  background: var(--warn-bg);
-  color: var(--warn);
+.evenement-deuil .annee::after {
+  box-shadow: 0 0 0 4px var(--fond), 0 0 0 6px var(--accent);  /* Double anneau pour marquer les deuils */
+}
+
+.evenement-publication .carte {
+  border-left-style: dashed;          /* Je passe en pointillé pour distinguer les publications seules */
+  background: #fafaf7;
+}
+
+.evenement-publication .annee::after {
+  background: transparent;
+  border: 2px solid var(--accent);    /* Anneau vide pour les publications seules */
+}
+
+/* ---------- Bloc d'alerte ---------- */
+
+.alerte {
+  background: var(--alerte-fond);
+  color: var(--alerte);
   padding: 9px 13px;
   border-radius: 6px;
   font-size: 0.9rem;
-  border-left: 3px solid var(--warn);
+  border-left: 3px solid var(--alerte);
   margin-top: 10px !important;
   line-height: 1.5;
 }
 
-.warn strong { color: var(--warn); }
-
-/* ---------- Événements "deuil" ---------- */
-
-.event--death .event__year::after {
-  box-shadow: 0 0 0 4px var(--bg), 0 0 0 6px var(--accent);
-}
+.alerte strong { color: var(--alerte); }
 
 /* ---------- Bouton "Sources" ---------- */
 
-.source-btn {
+.bouton-sources {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -227,26 +241,26 @@ body.modal-open { overflow: hidden; }
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-.source-btn::before {
-  content: "▤";
+.bouton-sources::before {
+  content: "▤";                       /* Petit pictogramme avant le mot Sources */
   font-size: 0.95rem;
   line-height: 1;
 }
 
-.source-btn:hover,
-.source-btn:focus-visible {
+.bouton-sources:hover,
+.bouton-sources:focus-visible {
   background: var(--accent);
   color: #ffffff;
   outline: none;
 }
 
-/* ---------- Sources cachées (contenu de la modale) ---------- */
+/* ---------- Sources cachées (contenu de la fenêtre) ---------- */
 
-.event__sources { display: none; }
+.sources { display: none; }
 
-/* ---------- Modale (fenêtre pop-up) ---------- */
+/* ---------- Fenêtre modale ---------- */
 
-.source-modal {
+.fenetre-sources {
   position: fixed;
   inset: 0;
   display: none;
@@ -258,17 +272,17 @@ body.modal-open { overflow: hidden; }
   z-index: 1000;
 }
 
-.source-modal.is-open {
+.fenetre-sources.fenetre-ouverte {
   display: flex;
-  animation: modal-fade 0.18s ease-out;
+  animation: apparition 0.18s ease-out;
 }
 
-@keyframes modal-fade {
+@keyframes apparition {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
-.modal {
+.fenetre {
   position: relative;
   width: 100%;
   max-width: 640px;
@@ -278,15 +292,15 @@ body.modal-open { overflow: hidden; }
   border-radius: 14px;
   padding: 28px 32px 30px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-  animation: modal-pop 0.2s ease-out;
+  animation: surgir 0.2s ease-out;
 }
 
-@keyframes modal-pop {
+@keyframes surgir {
   from { transform: translateY(10px) scale(0.98); opacity: 0; }
-  to { transform: translateY(0) scale(1); opacity: 1; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
 }
 
-.modal__close {
+.fermer {
   position: absolute;
   top: 12px;
   right: 14px;
@@ -297,7 +311,7 @@ body.modal-open { overflow: hidden; }
   justify-content: center;
   font-size: 1.5rem;
   line-height: 1;
-  color: var(--muted);
+  color: var(--gris);
   background: transparent;
   border: none;
   border-radius: 50%;
@@ -305,48 +319,48 @@ body.modal-open { overflow: hidden; }
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-.modal__close:hover,
-.modal__close:focus-visible {
+.fermer:hover,
+.fermer:focus-visible {
   background: #f3f4f6;
-  color: var(--ink);
+  color: var(--encre);
   outline: none;
 }
 
-.modal__title {
+.titre-fenetre {
   margin: 0 24px 16px 0;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--ink);
+  color: var(--encre);
   line-height: 1.35;
   padding-bottom: 12px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid var(--bordure);
 }
 
-.modal__body h5 {
+.corps-fenetre h5 {
   margin: 18px 0 8px;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--muted);
+  color: var(--gris);
 }
 
-.modal__body h5:first-child { margin-top: 0; }
+.corps-fenetre h5:first-child { margin-top: 0; }
 
-.modal__body ul {
+.corps-fenetre ul {
   margin: 0 0 4px;
   padding-left: 20px;
 }
 
-.modal__body li {
+.corps-fenetre li {
   margin-bottom: 6px;
   font-size: 0.94rem;
   line-height: 1.55;
 }
 
-.modal__body p {
+.corps-fenetre p {
   margin: 0 0 6px;
   font-size: 0.94rem;
   line-height: 1.55;
@@ -354,7 +368,7 @@ body.modal-open { overflow: hidden; }
 
 /* ---------- Pastilles de confiance ---------- */
 
-.confidence {
+.confiance {
   display: inline-block;
   padding: 2px 10px;
   border-radius: 999px;
@@ -364,87 +378,133 @@ body.modal-open { overflow: hidden; }
   letter-spacing: 0.02em;
 }
 
-.confidence--high {
+.confiance-haute {
   background: #d1fae5;
-  color: var(--conf-high);
+  color: var(--confiance-haute);
 }
 
-.confidence--medium {
+.confiance-moyenne {
   background: #fef3c7;
-  color: var(--conf-medium);
+  color: var(--confiance-moyenne);
 }
 
-.confidence--low {
+.confiance-basse {
   background: #fee2e2;
-  color: var(--conf-low);
+  color: var(--confiance-basse);
+}
+
+/* ---------- Bloc œuvres (gris, dans la carte) ---------- */
+
+.oeuvres {
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: var(--gris-oeuvre);
+  border-left: 3px solid var(--gris-oeuvre-bord);
+  border-radius: 6px;
+}
+
+.titre-oeuvres {
+  margin: 0 0 8px;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--gris-oeuvre-titre);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.liste-oeuvres {
+  margin: 0 0 8px;
+  padding-left: 20px;
+  font-size: 0.94rem;
+  line-height: 1.55;
+  color: var(--encre);
+}
+
+.liste-oeuvres li {
+  margin-bottom: 4px;
+}
+
+.liste-oeuvres em {
+  font-style: italic;
+}
+
+.oeuvres .bouton-sources {
+  margin-top: 6px;
+  color: var(--gris-oeuvre-titre);
+  border-color: var(--gris-oeuvre-bord);
+}
+
+.oeuvres .bouton-sources:hover,
+.oeuvres .bouton-sources:focus-visible {
+  background: var(--gris-oeuvre-titre);
+  color: #ffffff;
 }
 
 /* ---------- Pied de page ---------- */
 
-.page-footer {
+.pied-page {
   max-width: 900px;
   margin: 0 auto;
   padding: 30px 24px 60px;
   text-align: center;
-  color: var(--muted);
+  color: var(--gris);
   font-size: 0.88rem;
-  border-top: 1px solid var(--border);
+  border-top: 1px solid var(--bordure);
 }
 
-.page-footer p { margin: 4px 0; }
-.footer-warn { color: var(--warn); font-weight: 600; }
+.pied-page p { margin: 4px 0; }
+.alerte-pied { color: var(--alerte); font-weight: 600; }
 
-/* ---------- Responsive : mobile ---------- */
+/* ---------- Lien de retour ---------- */
 
-@media (max-width: 640px) {
-  .page-header { padding: 36px 18px 24px; }
-  .timeline { padding: 10px 18px 60px; }
-  .period__title { font-size: 0.95rem; padding: 11px 16px; }
-  .events::before { display: none; }
-  .event { grid-template-columns: 1fr; column-gap: 0; margin-bottom: 14px; }
-  .event__year { text-align: left; padding-top: 0; margin-bottom: 6px; font-size: 0.95rem; }
-  .event__year::after { display: none; }
-  .event__card { padding: 14px 16px; }
-  .modal { padding: 22px 20px 24px; max-height: 88vh; }
-  .modal__title { font-size: 1rem; }
-}
-
-/* ---------- Impression ---------- */
-
-@media print {
-  body { background: white; font-size: 11pt; }
-  .period__title { color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .event__card { box-shadow: none; border: 1px solid var(--border); page-break-inside: avoid; }
-  .events::before { opacity: 0.4; }
-  .event__year::after { box-shadow: none; }
-  .warn { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-  .page-footer { border-top: none; }
-  .source-btn { display: none; }
-  .source-modal { display: none !important; }
-}
-
-/* ---------- Lien de retour vers l'accueil ---------- */
-
-.back-link {
+.lien-retour {
   display: inline-block;
   margin-bottom: 20px;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--muted);
+  color: var(--gris);
   text-decoration: none;
   padding: 6px 14px;
   border-radius: 6px;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
-.back-link:hover,
-.back-link:focus-visible {
+.lien-retour:hover,
+.lien-retour:focus-visible {
   background: rgba(0, 0, 0, 0.06);
-  color: var(--ink);
+  color: var(--encre);
   outline: none;
 }
 
+/* ---------- Responsive mobile ---------- */
+
+@media (max-width: 640px) {
+  .entete { padding: 36px 18px 24px; }
+  .chronologie { padding: 10px 18px 60px; }
+  .titre-periode { font-size: 0.95rem; padding: 11px 16px; }
+  .evenements::before { display: none; }               /* Je masque la ligne verticale sur petit écran */
+  .evenement { grid-template-columns: 1fr; column-gap: 0; margin-bottom: 14px; }
+  .annee { text-align: left; padding-top: 0; margin-bottom: 6px; font-size: 0.95rem; }
+  .annee::after { display: none; }
+  .carte { padding: 14px 16px; }
+  .fenetre { padding: 22px 20px 24px; max-height: 88vh; }
+  .titre-fenetre { font-size: 1rem; }
+}
+
+/* ---------- Impression ---------- */
+
 @media print {
-  .back-link { display: none; }
+  body { background: white; font-size: 11pt; }
+  .titre-periode { color: white !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .carte { box-shadow: none; border: 1px solid var(--bordure); page-break-inside: avoid; }
+  .evenements::before { opacity: 0.4; }
+  .annee::after { box-shadow: none; }
+  .alerte { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .oeuvres { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .pied-page { border-top: none; }
+  .bouton-sources { display: none; }                  /* Je masque les boutons à l'impression */
+  .fenetre-sources { display: none !important; }
+  .lien-retour { display: none; }
 }
